@@ -1,8 +1,18 @@
-import java.util.ArrayList;
-import java.io.File;
-import java.util.Scanner;
 
 public class Course {
-    File myObj = new File("seminarKey.csv");
-    Scanner myScanner = new Scanner(myObj);
+    int id;
+    String presenter;
+    String name;
+
+    public Course(String name, int id, String presenter) {
+        this.name = name;
+        this.id = id;
+        this.presenter = presenter;
+        
+    }
+
+    public String toString() {
+        return name;
+    }
+    
 }
