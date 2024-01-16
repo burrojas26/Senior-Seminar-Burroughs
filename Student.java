@@ -1,5 +1,5 @@
 public class Student {
-    int time;
+    double time;
     String email;
     String name;
     int first;

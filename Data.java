@@ -31,7 +31,7 @@ public class Data {
             Scanner myScanner = new Scanner(myObj);
             while (myScanner.hasNextLine()) {
                 String[] data = myScanner.nextLine().split(",");
-                students.add(new Student(Double.parseDouble(data[0].split(" ")[1].split(":")[0] + "." + (Double.parseDouble(data[0].split(" ")[1].split(":")[1])/60.0))), );
+                students.add(new Student(Double.parseDouble(data[0].split(" ")[1].split(":")[0]) + (Double.parseDouble(data[0].split(" ")[1].split(":")[1])/60.0)));
             }
             //Start time,Email,Email2,Name,Select your first choice for a senior seminar session.,Select your second choice for a senior seminar session.,Select your third choice for a senior seminar session.,Select your fourth choice for a senior seminar session.,Select your fifth choice for a senior seminar session.,Email22,Column1,Column2,Column3,Column4,Column5
         }
