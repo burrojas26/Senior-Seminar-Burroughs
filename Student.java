@@ -1,24 +1,30 @@
 public class Student {
-    double time;
+    String time;
     String email;
     String name;
-    int first;
-    int second;
-    int third;
-    int fourth;
-    int fifth;
+    int[] choices = new int[5];
+    
 
-    public Student(double time, String email, String name, int first, int second, int third, int fourth, int fifth) {
+    public Student(String time, String email, String name, String first, String second, String third, String fourth, String fifth) {
         this.time = time; 
         this.email = email;
         this.name = name;
-        this.first = first;
-        this.second = second;
-        this.third = third;
-        this.fourth = fourth;
-        this.fifth = fifth;
+        this.choices[0] = Integer.parseInt(first);
+        this.choices[1] = Integer.parseInt(second);
+        this.choices[2] = Integer.parseInt(third);
+        this.choices[3] = Integer.parseInt(fourth);
+        this.choices[4] = Integer.parseInt(fifth);
+    }
+
+    public String toString() {
+        return time + ": " + name;
+    }
+
+    public String getTime() {
+        return time;
     }
 }
 
 
 
+//(Double.parseDouble(data[0].split(" ")[1].split(":")[0]) + (Double.parseDouble(data[0].split(" ")[1].split(":")[1])/60.0)

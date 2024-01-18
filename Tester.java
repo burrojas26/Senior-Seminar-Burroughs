@@ -6,10 +6,11 @@ import java.util.ArrayList;
 public class Tester {
     
     public static void main(String[] args) {
-        ArrayList<Course> courses = new ArrayList<Course>();
-        
-        for (Course c : courses) {
-            System.out.println(c);
+        Data data = new Data();
+        data.loadCourses();
+        data.loadStudents();
+        for (Student s : data.getStudents()) {
+            System.out.println(s);
         }
     }
 }
