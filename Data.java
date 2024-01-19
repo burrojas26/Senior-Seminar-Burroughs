@@ -43,8 +43,7 @@ public class Data {
             for (int i = 0; i < students.size(); i++) {
                 Student s = students.get(i);
                 if (s.getTime().equals("")) {
-                    System.out.println(s);
-                    students.remove(0);
+                    students.remove(i);
                     noTime.add(s);
                     i--;
                 }
