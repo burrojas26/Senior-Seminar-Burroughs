@@ -6,3 +6,6 @@ This will sort the students into five different classes based on their choices. 
 
 12/18/24:
 Today I loaded the students into the program and sorted them by time. I am in the middle of trying to put the people without times at the end of the list instead of the beginning. I finished the student class, the course class, and I setup the data class to carry all of the data. 
+
+1/22/24:
+Today I finished getting all of the people and courses into arraylists. I also created a 2d array for the schedule and added popularity to the courses.
