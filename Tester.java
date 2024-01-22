@@ -9,8 +9,10 @@ public class Tester {
         Data data = new Data();
         data.loadCourses();
         data.loadStudents();
-        for (Student s : data.getStudents()) {
-            System.out.println(s);
+        data.getInterest();
+        ArrayList<Course> courses = data.getCourses();
+        for (Course c : courses) {
+            System.out.println(c.getInterest() + ": " + c.getTwice());
         }
     }
 }

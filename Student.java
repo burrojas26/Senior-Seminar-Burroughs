@@ -16,12 +16,25 @@ public class Student {
         this.choices[4] = Integer.parseInt(fifth);
     }
 
-    public String toString() {
-        return time + ": " + name;
+    public boolean checkChoice(int choiceNum) {
+        for (int i = 0; i < choices.length; i++) {
+            if (choices[i] == choiceNum) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public String getTime() {
         return time;
+    }
+
+    public String toString() {
+        return time + ": " + name;
     }
 }
 
