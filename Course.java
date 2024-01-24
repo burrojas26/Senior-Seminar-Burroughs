@@ -1,10 +1,11 @@
-
+import java.util.ArrayList;
 public class Course {
     int id;
     String presenter;
     String name;
     int interest = 0;
     boolean twice = false;
+    ArrayList<Course> conflictCourses = new ArrayList<Course>();
 
     public Course(String name, int id, String presenter) {
         this.name = name;
@@ -17,12 +18,24 @@ public class Course {
         return id;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public int getInterest() {
         return interest;
     }
 
+    public String getInstructor() {
+        return presenter;
+    }
+
     public boolean getTwice() {
         return twice;
+    }
+
+    public ArrayList<Course> getConflicts() {
+        return conflictCourses;
     }
 
     public void addInterest() {
@@ -31,6 +44,10 @@ public class Course {
 
     public void setInterest(int num) {
         interest = num;
+    }
+
+    public void addConflictCourse(Course conflict) {
+        conflictCourses.add(conflict);
     }
 
     public void setTwice(boolean b) {

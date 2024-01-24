@@ -38,6 +38,16 @@ public class Data {
                 }
             }
         }
+        int total = 0;
+        for (Course c : courses) {
+            total += c.getInterest();
+        }
+        total /= courses.size();
+        for (Course c : courses) {
+            if (c.getInterest() > total) {
+                c.setTwice(true);
+            }
+        }
     }
 
     /*

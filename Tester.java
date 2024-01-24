@@ -11,8 +11,14 @@ public class Tester {
         data.loadStudents();
         data.getInterest();
         ArrayList<Course> courses = data.getCourses();
+        ArrayList<Student> students = data.getStudents();
+        Schedule schedule = new Schedule(students, courses);
+        schedule.findConflicts();
         for (Course c : courses) {
-            System.out.println(c.getInterest() + ": " + c.getTwice());
+            for (Course conflict : c.getConflicts()) {
+                System.out.println(conflict.getInstructor());
+            }
+            System.out.println("");
         }
     }
 }
