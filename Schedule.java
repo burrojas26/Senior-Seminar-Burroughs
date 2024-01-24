@@ -23,9 +23,7 @@ public class Schedule {
     public void populateSchedule() {
         for (int col = 0; col < schedule[0].length; col++) {
             for (int i = 0; i < courses.size(); i++) {
-                if (courses.get(i).getTwice()) {
-                    schedule[col][i] = courses.get(i);
-                }
+                schedule[col][i] = courses.get(i);
             }
         }
         

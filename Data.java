@@ -31,23 +31,20 @@ public class Data {
      * sets a variable (twice) to be true if the class will occur twice
      */
     public void getInterest() {
+        int[][] interestSort = new int[courses.size()][courses.size()];
         for (Course c : courses) {
             for (Student s : students) {
                 if (s.checkChoice(c.getId())) {
                     c.addInterest();
                 }
             }
+
         }
-        int total = 0;
-        for (Course c : courses) {
-            total += c.getInterest();
-        }
-        total /= courses.size();
-        for (Course c : courses) {
-            if (c.getInterest() > total) {
-                c.setTwice(true);
-            }
-        }
+        
+
+
+
+
     }
 
     /*
@@ -105,3 +102,19 @@ public class Data {
         return students;
     }
 }
+
+
+
+
+/*
+ * int total = 0;
+        for (Course c : courses) {
+            total += c.getInterest();
+        }
+        total /= courses.size();
+        for (Course c : courses) {
+            if (c.getInterest() > total) {
+                c.setTwice(true);
+            }
+        }
+ */
