@@ -21,6 +21,11 @@ public class Schedule {
     }
 
     public void populateSchedule() {
+
+        schedule[0][0] = courses.get(0);
+
+
+        //Delete this, try a different way to add data -> 1 course at a time
         for (int i = 0; i < schedule[0].length; i++) {
             int row = 0;
             while (!courses.get(i).noConflicts(schedule[row])) {
