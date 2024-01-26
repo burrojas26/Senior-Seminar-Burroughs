@@ -21,12 +21,21 @@ public class Schedule {
     }
 
     public void populateSchedule() {
-        for (int col = 0; col < schedule[0].length; col++) {
-            for (int i = 0; i < courses.size(); i++) {
-                schedule[col][i] = courses.get(i);
+        for (int i = 0; i < schedule[0].length; i++) {
+            int row = 0;
+            while (!courses.get(i).noConflicts(schedule[row])) {
+                if (row >= schedule.length) {
+                    break;
+                }
+                row++;
             }
+            // Have to be able to get all of the courses somehow (cant use i)
+            schedule[row][i] = courses.get(i); 
         }
-        
+    }
+
+    public Course[][] getSchedule() {
+        return schedule;
     }
 
 }

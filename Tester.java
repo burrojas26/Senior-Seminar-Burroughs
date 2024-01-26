@@ -12,11 +12,13 @@ public class Tester {
         data.getInterest();
         ArrayList<Course> courses = data.getCourses();
         ArrayList<Student> students = data.getStudents();
-        Schedule schedule = new Schedule(students, courses);
-        schedule.findConflicts();
-        for (Course c : courses) {
-            for (Course conflict : c.getConflicts()) {
-                System.out.println(conflict.getInstructor());
+        Schedule scheduler = new Schedule(students, courses);
+        scheduler.findConflicts();
+        scheduler.populateSchedule();
+        Course[][] schedule = scheduler.getSchedule();
+        for (int i = 0; i < schedule.length; i++) {
+            for (int j = 0; j < schedule[0].length; j++) {
+                System.out.print(schedule[i][j] + " ");
             }
             System.out.println("");
         }

@@ -38,6 +38,21 @@ public class Course {
         return conflictCourses;
     }
 
+    public boolean noConflicts(Course[] courses) {
+        ArrayList<Course> coursesList = new ArrayList<Course>();
+        for (Course c : courses) {
+            coursesList.add(c);
+        }
+        for (Course c : coursesList) {
+            if (conflictCourses.contains(c)) {
+                System.out.println("False");
+                return false;
+            }
+            System.out.println("Ture");
+        }
+        return true;
+    }
+
     public void addInterest() {
         interest++;
     }

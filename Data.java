@@ -31,7 +31,6 @@ public class Data {
      * sets a variable (twice) to be true if the class will occur twice
      */
     public void getInterest() {
-        int[][] interestSort = new int[courses.size()][courses.size()];
         for (Course c : courses) {
             for (Student s : students) {
                 if (s.checkChoice(c.getId())) {
@@ -41,10 +40,22 @@ public class Data {
 
         }
         
+        // Sort
+        for (int i = 0; i < courses.size(); i++) {
+            for (int j = i+1; j < courses.size(); j++) {
+                if (courses.get(j).getInterest() > courses.get(i).getInterest()) {
+                    Course temp = courses.get(j);
+                    courses.set(j, courses.get(i));
+                    courses.set(i, temp);
+                }
+            }
 
+        }
 
-
-
+        // Set twice to true if in the top 7 (7 extra spots)
+        for (int i = 0; i < 7; i++) {
+            courses.get(i).setTwice(true);
+        }
     }
 
     /*
@@ -102,19 +113,3 @@ public class Data {
         return students;
     }
 }
-
-
-
-
-/*
- * int total = 0;
-        for (Course c : courses) {
-            total += c.getInterest();
-        }
-        total /= courses.size();
-        for (Course c : courses) {
-            if (c.getInterest() > total) {
-                c.setTwice(true);
-            }
-        }
- */
