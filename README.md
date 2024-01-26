@@ -12,3 +12,6 @@ Today I finished getting all of the people and courses into arraylists. I also c
 
 1/24/24: 
 Today I started creating the course structure, and I started adding the classes that conflicted to each course. 
+
+1/26/24:
+Sorted the courses by interest. I also started trying to populate the schedule based on the conflicts using for loops. I may switch to populating a slightly different way. 
