@@ -9,3 +9,6 @@ Today I loaded the students into the program and sorted them by time. I am in th
 
 1/22/24:
 Today I finished getting all of the people and courses into arraylists. I also created a 2d array for the schedule and added popularity to the courses.
+
+1/24/24: 
+Today I started creating the course structure, and I started adding the classes that conflicted to each course. 
