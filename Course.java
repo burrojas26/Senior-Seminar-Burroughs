@@ -45,10 +45,8 @@ public class Course {
         }
         for (Course c : coursesList) {
             if (conflictCourses.contains(c)) {
-                System.out.println("False");
                 return false;
             }
-            System.out.println("Ture");
         }
         return true;
     }
@@ -70,7 +68,7 @@ public class Course {
     }
 
     public String toString() {
-        return name;
+        return Integer.toString(id) + ": " + Integer.toString(interest);
     }
     
 }

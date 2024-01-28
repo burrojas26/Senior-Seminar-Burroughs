@@ -3,6 +3,7 @@ public class Schedule {
     Course[][] schedule = new Course[5][5];
     ArrayList<Student> students;
     ArrayList<Course> courses;
+    ArrayList<Course> coursesTwice = new ArrayList<Course>();
 
     public Schedule(ArrayList<Student> students, ArrayList<Course> courses) {
         this.students = students;
@@ -24,19 +25,56 @@ public class Schedule {
 
         schedule[0][0] = courses.get(0);
 
-
-        //Delete this, try a different way to add data -> 1 course at a time
-        for (int i = 0; i < schedule[0].length; i++) {
-            int row = 0;
-            while (!courses.get(i).noConflicts(schedule[row])) {
-                if (row >= schedule.length) {
-                    break;
-                }
-                row++;
+        for (Course c : courses) {
+            if (c.getTwice()) {
+                coursesTwice.add(c);
             }
-            // Have to be able to get all of the courses somehow (cant use i)
-            schedule[row][i] = courses.get(i); 
         }
+
+        for (Course c : courses) {
+            for (int i = 0; i < schedule.length; i++) {
+                if (c.noConflicts(schedule[i])) {
+                    for (int j = 0; j < schedule[0].length; j++) {
+                        if (schedule[i][j] == null && !containsCourse(c, schedule)) {
+                            schedule[i][j] = c;
+                        }
+                    }
+                }
+            }
+        }
+
+        for (Course c : coursesTwice) {
+            for (int i = 0; i < schedule.length; i++) {
+                if (c.noConflicts(schedule[i])) {
+                    for (int j = 0; j < schedule[0].length; j++) {
+                        // This overwritten method checks just the row instead of the whole 2d array
+                        if (schedule[i][j] == null && !containsCourse(c, schedule[i])) {
+                            schedule[i][j] = c;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public boolean containsCourse(Course course, Course[][] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr[0].length; j++) {
+                if (arr[i][j] == course) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean containsCourse(Course course, Course[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == course) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public Course[][] getSchedule() {
