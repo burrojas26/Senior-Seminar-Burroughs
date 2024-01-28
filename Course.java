@@ -5,6 +5,7 @@ public class Course {
     String name;
     int interest = 0;
     boolean twice = false;
+    ArrayList<Student> interestedStudents = new ArrayList<Student>();
     ArrayList<Course> conflictCourses = new ArrayList<Course>();
 
     public Course(String name, int id, String presenter) {
@@ -24,6 +25,10 @@ public class Course {
 
     public int getInterest() {
         return interest;
+    }
+
+    public ArrayList<Student> getInterestedStudents() {
+        return interestedStudents;
     }
 
     public String getInstructor() {
@@ -51,8 +56,9 @@ public class Course {
         return true;
     }
 
-    public void addInterest() {
+    public void addInterest(Student student) {
         interest++;
+        interestedStudents.add(student);
     }
 
     public void setInterest(int num) {
@@ -68,7 +74,7 @@ public class Course {
     }
 
     public String toString() {
-        return Integer.toString(id) + ": " + Integer.toString(interest);
+        return Integer.toString(id);
     }
     
 }

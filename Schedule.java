@@ -13,11 +13,19 @@ public class Schedule {
     public void findConflicts() {
         for (Course c : courses) {
             for (Course c2 : courses) {
+                int overlapCount = 0;
                 if (c.getInstructor().equals(c2.getInstructor())) {
                     c.addConflictCourse(c2);
                 }
+                for (Student s : c.getInterestedStudents()) {
+                    if (c2.getInterestedStudents().contains(s)) {
+                        overlapCount++;
+                    }
+                }
+                if (overlapCount >= c.getInterestedStudents().size()) {
+                    c.addConflictCourse(c2);
+                }
             }
-            
         }
     }
 

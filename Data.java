@@ -34,7 +34,7 @@ public class Data {
         for (Course c : courses) {
             for (Student s : students) {
                 if (s.checkChoice(c.getId())) {
-                    c.addInterest();
+                    c.addInterest(s);
                 }
             }
 
