@@ -22,7 +22,7 @@ public class Schedule {
                         overlapCount++;
                     }
                 }
-                if (overlapCount >= c.getInterestedStudents().size()) {
+                if (overlapCount >= c.getInterestedStudents().size()*.75) {
                     c.addConflictCourse(c2);
                 }
             }
@@ -43,7 +43,7 @@ public class Schedule {
             for (int i = 0; i < schedule.length; i++) {
                 if (c.noConflicts(schedule[i])) {
                     for (int j = 0; j < schedule[0].length; j++) {
-                        if (schedule[i][j] == null && !containsCourse(c, schedule)) {
+                        if (schedule[i][j] == null && !containsCourse(c, schedule, 1)) {
                             schedule[i][j] = c;
                         }
                     }
@@ -56,7 +56,7 @@ public class Schedule {
                 if (c.noConflicts(schedule[i])) {
                     for (int j = 0; j < schedule[0].length; j++) {
                         // This overwritten method checks just the row instead of the whole 2d array
-                        if (schedule[i][j] == null && !containsCourse(c, schedule[i])) {
+                        if (schedule[i][j] == null && !containsCourse(c, schedule[i]) && !containsCourse(c, schedule, 2)) {
                             schedule[i][j] = c;
                         }
                     }
@@ -65,13 +65,17 @@ public class Schedule {
         }
     }
 
-    public boolean containsCourse(Course course, Course[][] arr) {
+    public boolean containsCourse(Course course, Course[][] arr, int times) {
+        int count = 0;
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0; j < arr[0].length; j++) {
                 if (arr[i][j] == course) {
-                    return true;
+                    count++;
                 }
             }
+        }
+        if (count >= times) {
+            return true;
         }
         return false;
     }
