@@ -89,6 +89,21 @@ public class Schedule {
         return false;
     }
 
+    public void assignStudents() {
+        for (int i = 0; i < 5; i++) {
+            for (Student s : students) {
+                for (int row = 0; row < schedule.length; row++) {
+                    for (int col = 0; col < schedule[0].length; col++) {
+                        if (s.getChoices()[i] == schedule[row][col].getId() && s.notAttending(schedule[row][col]) && !schedule[row][col].atMax()) {
+                            s.setAttending(row, col, schedule[row][col]);
+                            schedule[row][col].enroll();
+                        }
+                    }
+                }
+            }
+        } 
+    }
+
     public Course[][] getSchedule() {
         return schedule;
     }

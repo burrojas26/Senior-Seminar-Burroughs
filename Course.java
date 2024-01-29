@@ -5,6 +5,8 @@ public class Course {
     String name;
     int interest = 0;
     boolean twice = false;
+    int currEnrolled = 0;
+    int max = 15;
     ArrayList<Student> interestedStudents = new ArrayList<Student>();
     ArrayList<Course> conflictCourses = new ArrayList<Course>();
 
@@ -39,6 +41,13 @@ public class Course {
         return twice;
     }
 
+    public boolean atMax() {
+        if (currEnrolled >= max) {
+            return true;
+        }
+        return false;
+    }
+
     public ArrayList<Course> getConflicts() {
         return conflictCourses;
     }
@@ -56,6 +65,10 @@ public class Course {
         return true;
     }
 
+    public void enroll() {
+        currEnrolled++;
+    }
+
     public void addInterest(Student student) {
         interest++;
         interestedStudents.add(student);
@@ -71,6 +84,12 @@ public class Course {
 
     public void setTwice(boolean b) {
         twice = b;
+        if (twice) {
+            max *= 2;
+        }
+        else {
+            max = 15;
+        }
     }
 
     public String toString() {

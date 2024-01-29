@@ -22,5 +22,10 @@ public class Tester {
             }
             System.out.println("");
         }
+        scheduler.assignStudents();
+        for (Student s : students) {
+            s.printAttending();
+            System.out.println("\n");
+        }
     }
 }

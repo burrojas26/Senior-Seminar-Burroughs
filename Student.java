@@ -3,6 +3,7 @@ public class Student {
     String email;
     String name;
     int[] choices = new int[5];
+    Course[][] attending = new Course[5][5];
     
 
     public Student(String time, String email, String name, String first, String second, String third, String fourth, String fifth) {
@@ -31,6 +32,34 @@ public class Student {
 
     public String getTime() {
         return time;
+    }
+
+    public int[] getChoices() {
+        return choices;
+    }
+
+    public void setAttending(int row, int col, Course c) {
+        attending[row][col] = c;
+    }
+
+    public boolean notAttending(Course c) {
+        for (int row = 0; row < attending.length; row++) {
+            for (int col = 0; col < attending[0].length; col++) {
+                if (attending[row][col] == c) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public void printAttending() {
+        for (int row = 0; row < attending.length; row++) {
+            for (int col = 0; col < attending[0].length; col++) {
+                System.out.print(attending[row][col] + " ");
+            }
+            System.out.println("");
+        }
     }
 
     public String toString() {
