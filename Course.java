@@ -7,8 +7,10 @@ public class Course {
     boolean twice = false;
     int currEnrolled = 0;
     int max = 15;
+    boolean duplicate = false;
     ArrayList<Student> interestedStudents = new ArrayList<Student>();
     ArrayList<Course> conflictCourses = new ArrayList<Course>();
+    ArrayList<Student> attending = new ArrayList<Student>();
 
     public Course(String name, int id, String presenter) {
         this.name = name;
@@ -16,6 +18,18 @@ public class Course {
         this.presenter = presenter;
         
     }
+    
+    public Course(String name, int id, String presenter, int interest, boolean twice, ArrayList<Student> interestedStudent, boolean duplicate) {
+        this.name = name;
+        this.id = id;
+        this.presenter = presenter;
+        this.interest = interest;
+        this.twice = twice;
+        this.interestedStudents = interestedStudent;
+        this.duplicate = duplicate;
+        
+    }
+
 
     public int getId() {
         return id;
@@ -29,6 +43,10 @@ public class Course {
         return interest;
     }
 
+    public String getPresenter() {
+        return presenter;
+    }
+
     public ArrayList<Student> getInterestedStudents() {
         return interestedStudents;
     }
@@ -39,6 +57,10 @@ public class Course {
 
     public boolean getTwice() {
         return twice;
+    }
+
+    public boolean getDuplicate() {
+        return duplicate;
     }
 
     public boolean atMax() {
@@ -84,13 +106,16 @@ public class Course {
 
     public void setTwice(boolean b) {
         twice = b;
-        if (twice) {
-            max *= 2;
-        }
-        else {
-            max = 15;
-        }
     }
+
+    public void setDuplicate(boolean b) {
+        duplicate = b;
+    }
+
+    public void addStudent(Student s) {
+        enroll();
+        attending.add(s);
+    } 
 
     public String toString() {
         return Integer.toString(id);
