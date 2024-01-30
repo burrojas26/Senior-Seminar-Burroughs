@@ -18,3 +18,6 @@ Sorted the courses by interest. I also started trying to populate the schedule b
 
 1/27/24-1/28/24:
 This weekend I assigned the courses to a time based on the courses they conflicted with. I made sure that the courses that were able to happen twice were accounted for and that they did not occur twice during the same time frame. I also started adding more courses to the conflicts of each course if 75% of the students interested in one course were also interested in another course. I plan to continue adding courses to the conflicts and then use the pre-placed courses to add the students based on how early they submitted their choices. 
+
+1/30/24:
+Today I made a duplicate course if the course should occur twice. This allowed me to check if a student was taking the course. I also changed the way I am adding the students. Now it will go through each row of the schedule and assign the students. I need to complete adding the students. 
