@@ -38,6 +38,10 @@ public class Student {
         return choices;
     }
 
+    public Course[][] getAttending() {
+        return attending;
+    }
+
     public void setAttending(int row, int col, Course c) {
         attending[row][col] = c;
     }
@@ -47,6 +51,19 @@ public class Student {
             for (int col = 0; col < attending[0].length; col++) {
                 if (attending[row][col] == c) {
                     return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public boolean notAttending(Course[] arr) {
+        for (Course c : arr) {
+            for (int row = 0; row < attending.length; row++) {
+                for (int col = 0; col < attending[0].length; col++) {
+                    if (attending[row][col] == c) {
+                        return false;
+                    }
                 }
             }
         }

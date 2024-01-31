@@ -92,6 +92,10 @@ public class Course {
         }
     }
 
+    public void clearConflicts() {
+        conflictCourses = new ArrayList<Course>();
+    }
+
     public String toString() {
         return Integer.toString(id);
     }

@@ -4,6 +4,9 @@ public class Schedule {
     ArrayList<Student> students;
     ArrayList<Course> courses;
     ArrayList<Course> coursesTwice = new ArrayList<Course>();
+    double percent = 0.62;
+    String past = "up";
+    boolean adaptPercent = true;
 
     public Schedule(ArrayList<Student> students, ArrayList<Course> courses) {
         this.students = students;
@@ -22,11 +25,39 @@ public class Schedule {
                         overlapCount++;
                     }
                 }
-                if (overlapCount >= c.getInterestedStudents().size()*.75) {
+                if (overlapCount >= c.getInterestedStudents().size()*0.62) {
                     c.addConflictCourse(c2);
                 }
             }
         }
+    }
+
+    public void reConfig() {
+        boolean tooSmall = false;
+        for (int row = 0; row < schedule.length; row++) {
+            for (int col = 0; col < schedule[0].length; col++) {
+                if (schedule[row][col] == null) {
+                    tooSmall = true;
+                }
+            }
+        }
+
+        if (tooSmall) {
+            percent+=0.05;
+            if (past.equals("up")) {
+                adaptPercent = false;
+            }
+            past = "up";
+        }
+        else {
+            adaptPercent = false;
+        }
+
+        for (Course c : courses) {
+            c.clearConflicts();
+        }
+        findConflicts();
+        populateSchedule();
     }
 
     public void populateSchedule() {
@@ -94,7 +125,7 @@ public class Schedule {
             for (Student s : students) {
                 for (int row = 0; row < schedule.length; row++) {
                     for (int col = 0; col < schedule[0].length; col++) {
-                        if (s.getChoices()[i] == schedule[row][col].getId() && s.notAttending(schedule[row][col]) && !schedule[row][col].atMax()) {
+                        if (s.getChoices()[i] == schedule[row][col].getId() && s.notAttending(schedule[row]) && !schedule[row][col].atMax()) {
                             s.setAttending(row, col, schedule[row][col]);
                             schedule[row][col].enroll();
                         }
@@ -102,6 +133,35 @@ public class Schedule {
                 }
             }
         } 
+
+        for (Student s : students) {
+            Course[][] attending = s.getAttending();
+            for (int rowA = 0; rowA < schedule.length; rowA++) {
+                for (int colA = 0; colA < schedule[0].length; colA++) {
+                    if (attending[rowA][colA] == null) {
+                        for (int col = 0; col < schedule[0].length; col++) {
+                            if (!schedule[rowA][col].atMax()) {
+                                s.setAttending(rowA, col, schedule[rowA][col]);
+                                schedule[rowA][col].enroll();
+                            }
+                        }
+                    }
+                    
+                }
+            }
+            
+        }
+        
+
+    }
+
+    public void createSchedule() {
+        findConflicts();
+        populateSchedule();
+        while (adaptPercent) {
+            reConfig();
+        }
+        assignStudents();
     }
 
     public Course[][] getSchedule() {

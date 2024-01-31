@@ -107,6 +107,15 @@ public class Data {
     }
 
     /*
+     * Uses the functions in this class to load all of the data
+     */
+    public void loadData() {
+        loadCourses();
+        loadStudents();
+        getInterest();
+    }
+
+    /*
      * returns the arraylist of students 
      */
     public ArrayList<Student> getStudents() {
