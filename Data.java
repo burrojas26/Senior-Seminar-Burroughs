@@ -29,6 +29,7 @@ public class Data {
      * sets the number of people that are interested
      * sorts the courses based on interest 
      * sets a variable (twice) to be true if the class will occur twice
+     * adds a duplicate course if the course is occurring twice
      */
     public void getInterest() {
         for (Course c : courses) {
@@ -54,7 +55,10 @@ public class Data {
 
         // Set twice to true if in the top 7 (7 extra spots)
         for (int i = 0; i < 7; i++) {
-            courses.get(i).setTwice(true);
+            Course currCourse = courses.get(i);
+            currCourse.setTwice(true);
+            // Adds a duplicate course if it is going twice
+            courses.add(new Course(currCourse.getName(), currCourse.getId(), currCourse.getPresenter(), currCourse.getInterest(), currCourse.getTwice(), currCourse.getInterestedStudents(), false));
         }
     }
 
