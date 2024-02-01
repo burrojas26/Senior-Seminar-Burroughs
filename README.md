@@ -21,3 +21,6 @@ This weekend I assigned the courses to a time based on the courses they conflict
 
 1/30/24:
 Today I made a duplicate course if the course should occur twice. This allowed me to check if a student was taking the course. I also changed the way I am adding the students. Now it will go through each row of the schedule and assign the students. I need to complete adding the students. 
+
+2/1/24:
+Today i finished the outline for my algorithm. I was able to add the students to five courses, with no one getting less than three of their courses. I need to make my code more optimized. Specifically, I need to make the course population more optimized and I need to make the student adding more optimized. I will do this by checking the interest for each course in the row to determine which placement would be more optimal for each student.
