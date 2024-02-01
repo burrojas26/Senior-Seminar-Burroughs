@@ -6,7 +6,7 @@ public class Course {
     int interest = 0;
     boolean twice = false;
     int currEnrolled = 0;
-    int max = 15;
+    int max = 16;
     boolean duplicate = false;
     ArrayList<Student> interestedStudents = new ArrayList<Student>();
     ArrayList<Course> conflictCourses = new ArrayList<Course>();

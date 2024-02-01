@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-public class Schedule {
+public class ScheduleBackUp {
     Course[][] schedule = new Course[5][5];
     ArrayList<Student> students;
     ArrayList<Course> courses;
@@ -13,7 +13,7 @@ public class Schedule {
     /*
      * Constructor
      */
-    public Schedule(ArrayList<Student> students, ArrayList<Course> courses) {
+    public ScheduleBackUp(ArrayList<Student> students, ArrayList<Course> courses) {
         this.students = students;
         this.courses = courses;
     }
@@ -121,11 +121,9 @@ public class Schedule {
      */
     public void assignStudents() {
         //assigns people to as many choices as possible
-        int[] currInterest = new int[5];
         for (int row = 0; row < schedule.length; row++) {
             for (int i = 0; i < 5; i++) {
                 for (Student s : students) {
-                    // Check the interest for each course in the row here
                     for (int col = 0; col < schedule[0].length; col++) {
                         if (s.getChoices()[i] == schedule[row][col].getId() && s.notAttending(schedule[row]) && s.notAttending(schedule[row][col].getId()) && !schedule[row][col].atMax()) {
                             if (schedule[row][col].getId() == s.getChoices()[i]) {

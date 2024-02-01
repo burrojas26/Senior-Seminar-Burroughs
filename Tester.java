@@ -6,10 +6,12 @@ import java.util.ArrayList;
 public class Tester {
     
     public static void main(String[] args) {
+        // Data class manages the data
         Data data = new Data();
         data.loadData();
         ArrayList<Course> courses = data.getCourses();
         ArrayList<Student> students = data.getStudents();
+        // Schedule class handles the scheduling
         Schedule scheduler = new Schedule(students, courses);
         scheduler.createSchedule();
         Course[][] schedule = scheduler.getSchedule();
@@ -23,24 +25,22 @@ public class Tester {
         }
         System.out.println("");
         
-        for (int i = 0; i < students.size(); i++) {
-            int[] currChoices = students.get(i).getChoices();
-            Course[][] attending = students.get(i).getAttending();
-            System.out.println("Choices: ");
-            for (int choice : currChoices) {
-                System.out.println(choice);
-            }
-            System.out.println("\nAttending: ");
-            for (int row = 0; row < attending.length; row++) {
-                for (int col = 0; col < attending[0].length; col++) {
-                    if (attending[row][col] != null) {
-                        System.out.println(attending[row][col]);
-                    }
-                }
-            }
-        }
-
-        System.out.println("\n" + students.size());
-        
+        // for (int i = 0; i < students.size() - 5; i++) {
+        //     int[] currChoices = students.get(i).getChoices();
+        //     Course[][] attending = students.get(i).getAttending();
+        //     System.out.println("Choices: ");
+        //     for (int choice : currChoices) {
+        //         System.out.println(choice);
+        //     }
+        //     System.out.println("\nAttending: ");
+        //     for (int row = 0; row < attending.length; row++) {
+        //         for (int col = 0; col < attending[0].length; col++) {
+        //             if (attending[row][col] != null) {
+        //                 System.out.print(attending[row][col] + " ");
+        //             }
+        //         }
+        //         System.out.println("");
+        //     }
+        // }
     }
 }
