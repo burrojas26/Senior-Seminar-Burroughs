@@ -67,34 +67,6 @@ public class Schedule {
         populateSchedule();
     }
 
-    public void reConfig() {
-        boolean tooSmall = false;
-        for (int row = 0; row < schedule.length; row++) {
-            for (int col = 0; col < schedule[0].length; col++) {
-                if (schedule[row][col] == null) {
-                    tooSmall = true;
-                }
-            }
-        }
-
-        if (tooSmall) {
-            percent+=0.05;
-            if (past.equals("up")) {
-                adaptPercent = false;
-            }
-            past = "up";
-        }
-        else {
-            adaptPercent = false;
-        }
-
-        for (Course c : courses) {
-            c.clearConflicts();
-        }
-        findConflicts();
-        populateSchedule();
-    }
-
     /*
      * Adds the courses to the 2d array that represents the schedule
      */
@@ -152,6 +124,7 @@ public class Schedule {
                 }
             }
         } 
+    }
 
         for (Student s : students) {
             Course[][] attending = s.getAttending();
@@ -170,10 +143,10 @@ public class Schedule {
             }
             
         }
-        
 
     }
 
+    
     public void createSchedule() {
         findConflicts();
         populateSchedule();
@@ -181,11 +154,9 @@ public class Schedule {
             reConfig();
         }
         assignStudents();
-        }
     }
 
     public Course[][] getSchedule() {
         return schedule;
     }
-
 }

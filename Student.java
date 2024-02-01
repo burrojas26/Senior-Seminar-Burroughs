@@ -46,10 +46,6 @@ public class Student {
         attending[row][col] = c;
     }
 
-    public Course[][] getAttending() {
-        return attending;
-    }
-
     public boolean notAttending(int c) {
         for (int row = 0; row < attending.length; row++) {
             for (int col = 0; col < attending[0].length; col++) {

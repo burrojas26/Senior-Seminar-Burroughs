@@ -114,6 +114,14 @@ public class Course {
         }
     }
 
+    public void clearConflicts() {
+        conflictCourses = new ArrayList<Course>();
+    }
+
+    public void addStudent(Student s) {
+        attending.add(s);
+    }
+
     public String toString() {
         return Integer.toString(id);
     }
