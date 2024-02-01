@@ -24,3 +24,6 @@ Today I made a duplicate course if the course should occur twice. This allowed m
 
 2/1/24:
 Today i finished the outline for my algorithm. I was able to add the students to five courses, with no one getting less than three of their courses. I need to make my code more optimized. Specifically, I need to make the course population more optimized and I need to make the student adding more optimized. I will do this by checking the interest for each course in the row to determine which placement would be more optimal for each student.
+
+Update to 2/1/24:
+I implemented an algorithm to place students that have multiple interests per time slot in the course with less interest from the other people. 
