@@ -120,18 +120,44 @@ public class Schedule {
      * it then goes back again and fills in any empty time slots
      */
     public void assignStudents() {
-        //assigns people to as many choices as possible
+        // assigns students that have multiple choices in the row to the one with the least number of interested students
         int[] currInterest = new int[5];
+        int smallestIndex = 0;
+        for (int row = 0; row < schedule.length; row++) {
+            for (Student s : students) {
+                s.clearCurrInterest();
+                for (int col = 0; col < schedule[0].length; col++) {
+                    // Check the interest for each course in the row here
+                    if (schedule[row][col].getInterestedStudents().contains(s) && s.notAttending(schedule[row][col].getId()) && !schedule[row][col].atMax()) {
+                        currInterest[col]++;
+                        s.addCurrInterest();
+                        smallestIndex = col;
+                    }
+                }
+            }
+            for (Student s : students) {
+                if (s.getCurrInterest() > 1) {
+                    for (int col = 1; col < currInterest.length; col++) {
+                        if (schedule[row][col].getInterestedStudents().contains(s) && currInterest[col] < currInterest[smallestIndex]) {
+                            smallestIndex = col;
+                        }
+                    }
+                    if (schedule[row][smallestIndex].getInterestedStudents().contains(s) && s.notAttending(schedule[smallestIndex]) && s.notAttending(schedule[row][smallestIndex].getId()) && !schedule[row][smallestIndex].atMax()) {
+                        schedule[row][smallestIndex].addStudent(s);
+                        s.setAttending(row, smallestIndex, schedule[row][smallestIndex]);
+                    }
+                }
+            }
+        }
+
+        // Assigns students to their choices
         for (int row = 0; row < schedule.length; row++) {
             for (int i = 0; i < 5; i++) {
                 for (Student s : students) {
-                    // Check the interest for each course in the row here
                     for (int col = 0; col < schedule[0].length; col++) {
                         if (s.getChoices()[i] == schedule[row][col].getId() && s.notAttending(schedule[row]) && s.notAttending(schedule[row][col].getId()) && !schedule[row][col].atMax()) {
-                            if (schedule[row][col].getId() == s.getChoices()[i]) {
-                                schedule[row][col].addStudent(s);
-                                s.setAttending(row, col, schedule[row][col]);
-                            }
+                            schedule[row][col].addStudent(s);
+                            s.setAttending(row, col, schedule[row][col]);
                         }
                     }
                 }
@@ -181,3 +207,15 @@ public class Schedule {
         return schedule;
     }
 }
+
+
+
+
+/*
+ * if (s.getChoices()[i] == schedule[row][col].getId() && s.notAttending(schedule[row]) && s.notAttending(schedule[row][col].getId()) && !schedule[row][col].atMax()) {
+                            if (schedule[row][col].getId() == s.getChoices()[i]) {
+                                schedule[row][col].addStudent(s);
+                                s.setAttending(row, col, schedule[row][col]);
+                            }
+                        }
+ */

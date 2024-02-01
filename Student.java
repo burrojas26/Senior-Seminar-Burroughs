@@ -4,6 +4,8 @@ public class Student {
     String name;
     int[] choices = new int[5];
     Course[][] attending = new Course[5][5];
+    // Used to determine how many interested courses there are per row
+    int currInterest = 0;
     
 
     public Student(String time, String email, String name, String first, String second, String third, String fourth, String fifth) {
@@ -42,8 +44,20 @@ public class Student {
         return attending;
     }
 
+    public int getCurrInterest() {
+        return currInterest;
+    }
+
     public void setAttending(int row, int col, Course c) {
         attending[row][col] = c;
+    }
+
+    public void addCurrInterest() {
+        currInterest++;
+    }
+
+    public void clearCurrInterest() {
+        currInterest = 0;
     }
 
     public boolean notAttending(int c) {

@@ -24,6 +24,24 @@ public class Tester {
             System.out.println("");
         }
         System.out.println("");
+
+        int average = 0;
+        for (Student s : students) {
+            int currCount = 0;
+            Course[][] attending = s.getAttending();
+            for (int i : s.getChoices()) {
+                for (int row = 0; row < attending.length; row++) {
+                    for (int col = 0; col < attending[0].length; col++) {
+                        if (attending[row][col] != null && attending[row][col].getId() == i) {
+                            currCount++;
+                        }
+                    }
+                }
+            }
+            average+=currCount;
+        }
+        average/=students.size();
+        System.out.println("Average: " + average);
         
         // for (int i = 0; i < students.size() - 5; i++) {
         //     int[] currChoices = students.get(i).getChoices();
