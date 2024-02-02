@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Tester {
     
@@ -25,8 +26,10 @@ public class Tester {
         }
         System.out.println("");
 
-        int average = 0;
-        for (Student s : students) {
+        ArrayList<Integer> numbers = new ArrayList<Integer>();
+        double average = 0;
+        for (int j = 0; j < students.size()-5; j++) {
+            Student s = students.get(j);
             int currCount = 0;
             Course[][] attending = s.getAttending();
             for (int i : s.getChoices()) {
@@ -39,11 +42,22 @@ public class Tester {
                 }
             }
             average+=currCount;
+            numbers.add(currCount);
         }
-        average/=students.size();
+        average/=(students.size()-5);
         System.out.println("Average: " + average);
+        Collections.sort(numbers);
+        System.out.println("Low: " + numbers.get(0));
+        System.out.println("High: " + numbers.get(numbers.size()-1));
+        int[] modeCalculation = new int[5];
+        for (int num : numbers) {
+            modeCalculation[num-1]++;
+        }
+        for (int i : modeCalculation) {
+            System.out.print(i + ", ");
+        }
         
-        // for (int i = 0; i < students.size() - 5; i++) {
+        // for (int i = 0; i < students.size(); i++) {
         //     int[] currChoices = students.get(i).getChoices();
         //     Course[][] attending = students.get(i).getAttending();
         //     System.out.println("Choices: ");
