@@ -26,36 +26,7 @@ public class Tester {
         }
         System.out.println("");
 
-        ArrayList<Integer> numbers = new ArrayList<Integer>();
-        double average = 0;
-        for (int j = 0; j < students.size()-5; j++) {
-            Student s = students.get(j);
-            int currCount = 0;
-            Course[][] attending = s.getAttending();
-            for (int i : s.getChoices()) {
-                for (int row = 0; row < attending.length; row++) {
-                    for (int col = 0; col < attending[0].length; col++) {
-                        if (attending[row][col] != null && attending[row][col].getId() == i) {
-                            currCount++;
-                        }
-                    }
-                }
-            }
-            average+=currCount;
-            numbers.add(currCount);
-        }
-        average/=(students.size()-5);
-        System.out.println("Average: " + average);
-        Collections.sort(numbers);
-        System.out.println("Low: " + numbers.get(0));
-        System.out.println("High: " + numbers.get(numbers.size()-1));
-        int[] modeCalculation = new int[5];
-        for (int num : numbers) {
-            modeCalculation[num-1]++;
-        }
-        for (int i : modeCalculation) {
-            System.out.print(i + ", ");
-        }
+        scheduler.printAverageData();
         
         // for (int i = 0; i < students.size(); i++) {
         //     int[] currChoices = students.get(i).getChoices();

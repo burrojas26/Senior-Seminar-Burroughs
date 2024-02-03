@@ -1,14 +1,14 @@
 import java.util.ArrayList;
+import java.util.Collections;
+
 public class Schedule {
     Course[][] schedule = new Course[5][5];
     ArrayList<Student> students;
     ArrayList<Course> courses;
     ArrayList<Course> coursesTwice = new ArrayList<Course>();
-    // Percent is used to calculate conflicts based on whether a course has percent amount of students interested in another course
-    double percent = 1.00;
-    // Past and adaptPercent are used to make percent dynamic in reConfig
-    String past = "up";
-    boolean adaptPercent = true;
+    double bestAverage = 0;
+    double bestPercent = 0.00;
+    double percent = 0.00;
 
     /*
      * Constructor
@@ -40,38 +40,43 @@ public class Schedule {
             }
         }
     }
-
+    
     /*
-     * This function checks to see if the schedule created has any null values
-     * if so it increases the percent
-     * it does this until it finds the top value
+     * This is the function called from the tester class
+     * it organizes the functions contained in this class into one function
+     * it also runs many different scenarios to find the best percent in order to get the best average
      */
-    public void reConfig() {
-        boolean tooSmall = false;
-        for (int row = 0; row < schedule.length; row++) {
-            for (int col = 0; col < schedule[0].length; col++) {
-                if (schedule[row][col] == null) {
-                    tooSmall = true;
-                }
+    public void createSchedule() {
+        // This part checks 20 possibilities for percent and determines the best one for the average number of courses students get
+        for (double p = 0.00; p < 1; p+=0.01) {
+            percent = p;
+            for (Course c : courses) {
+                c.clearConflicts();
+            }
+            for (Student s : students) {
+                s.clearAttending();
+            }
+            findConflicts();
+            populateSchedule();
+            assignStudents();
+            System.out.println(getAverage());
+            if (getAverage() > bestAverage) {
+                bestAverage = getAverage();
+                bestPercent = percent;
             }
         }
-
-        if (tooSmall) {
-            percent+=0.05;
-            if (past.equals("up")) {
-                adaptPercent = false;
-            }
-            past = "up";
-        }
-        else {
-            adaptPercent = false;
-        }
-
+        percent = bestPercent;
+        System.out.println("Best: " + bestPercent);
+        System.out.println("Percent: " + percent);
         for (Course c : courses) {
             c.clearConflicts();
         }
+        for (Student s : students) {
+            s.clearAttending();
+        }
         findConflicts();
         populateSchedule();
+        assignStudents();
     }
 
     /*
@@ -121,34 +126,34 @@ public class Schedule {
      */
     public void assignStudents() {
         // assigns students that have multiple choices in the row to the one with the least number of interested students
-        // int[] currInterest = new int[5];
-        // int smallestIndex = 0;
-        // for (int row = 0; row < schedule.length; row++) {
-        //     for (Student s : students) {
-        //         s.clearCurrInterest();
-        //         for (int col = 0; col < schedule[0].length; col++) {
-        //             // Check the interest for each course in the row here
-        //             if (schedule[row][col].getInterestedStudents().contains(s) && s.notAttending(schedule[row][col].getId()) && !schedule[row][col].atMax()) {
-        //                 currInterest[col]++;
-        //                 s.addCurrInterest();
-        //                 smallestIndex = col;
-        //             }
-        //         }
-        //     }
-        //     for (Student s : students) {
-        //         if (students.get(0).getCurrInterest() > 1) {
-        //             for (int col = 1; col < currInterest.length; col++) {
-        //                 if (schedule[row][col].getInterestedStudents().contains(students.get(0)) && currInterest[col] < currInterest[smallestIndex]) {
-        //                     smallestIndex = col;
-        //                 }
-        //             }
-        //             if (schedule[row][smallestIndex].getInterestedStudents().contains(students.get(0)) && s.notAttending(schedule[smallestIndex]) && s.notAttending(schedule[row][smallestIndex].getId()) && !schedule[row][smallestIndex].atMax()) {
-        //                 schedule[row][smallestIndex].addStudent(students.get(0));
-        //                 s.setAttending(row, smallestIndex, schedule[row][smallestIndex]);
-        //             }
-        //         }
-        //     }
-        // }
+        int[] currInterest = new int[5];
+        int smallestIndex = 0;
+        for (int row = 0; row < schedule.length; row++) {
+            for (Student s : students) {
+                s.clearCurrInterest();
+                for (int col = 0; col < schedule[0].length; col++) {
+                    // Check the interest for each course in the row here
+                    if (schedule[row][col] != null && schedule[row][col].getInterestedStudents().contains(s) && s.notAttending(schedule[row][col].getId()) && !schedule[row][col].atMax()) {
+                        currInterest[col]++;
+                        s.addCurrInterest();
+                        smallestIndex = col;
+                    }
+                }
+            }
+            for (Student s : students) {
+                if (students.get(0).getCurrInterest() > 1) {
+                    for (int col = 1; col < currInterest.length; col++) {
+                        if (schedule[row][col] != null && schedule[row][col].getInterestedStudents().contains(students.get(0)) && currInterest[col] < currInterest[smallestIndex]) {
+                            smallestIndex = col;
+                        }
+                    }
+                    if (schedule[row][smallestIndex].getInterestedStudents().contains(students.get(0)) && s.notAttending(schedule[smallestIndex]) && s.notAttending(schedule[row][smallestIndex].getId()) && !schedule[row][smallestIndex].atMax()) {
+                        schedule[row][smallestIndex].addStudent(students.get(0));
+                        s.setAttending(row, smallestIndex, schedule[row][smallestIndex]);
+                    }
+                }
+            }
+        }
 
         // Assigns students to their choices
         for (int row = 0; row < schedule.length; row++) {
@@ -190,33 +195,73 @@ public class Schedule {
     }
 
     /*
-     * This is the function that is called from the tester class
-     * it organizes the different functions in this class
-     * the while makes it so that the percentage is dynamic
+     * returns the average number of courses every student has been assigned to that they chose
      */
-    public void createSchedule() {
-        findConflicts();
-        populateSchedule();
-        while (adaptPercent) {
-            reConfig();
+    public double getAverage() {
+        ArrayList<Integer> numbers = new ArrayList<Integer>();
+        double average = 0;
+        for (int j = 0; j < students.size(); j++) {
+            Student s = students.get(j);
+            int currCount = 0;
+            Course[][] attending = s.getAttending();
+            for (int i : s.getChoices()) {
+                for (int row = 0; row < attending.length; row++) {
+                    for (int col = 0; col < attending[0].length; col++) {
+                        if (attending[row][col] != null && attending[row][col].getId() == i) {
+                            currCount++;
+                        }
+                    }
+                }
+            }
+            average+=currCount;
+            numbers.add(currCount);
         }
-        assignStudents();
-        System.out.println(percent);
+        average/=(students.size());
+        return average;
     }
 
+    /*
+     * prints the average number of courses that the students are taking that they picked
+     * prints the high low values of the picked courses that students are taking 
+     * prints the mode for each value
+     */
+    public void printAverageData() {
+        ArrayList<Integer> numbers = new ArrayList<Integer>();
+        double average = 0;
+        for (int j = 0; j < students.size()-5; j++) {
+            Student s = students.get(j);
+            int currCount = 0;
+            Course[][] attending = s.getAttending();
+            for (int i : s.getChoices()) {
+                for (int row = 0; row < attending.length; row++) {
+                    for (int col = 0; col < attending[0].length; col++) {
+                        if (attending[row][col] != null && attending[row][col].getId() == i) {
+                            currCount++;
+                        }
+                    }
+                }
+            }
+            average+=currCount;
+            numbers.add(currCount);
+        }
+        average/=(students.size()-5);
+        System.out.println("Average: " + average);
+        Collections.sort(numbers);
+        System.out.println("Low: " + numbers.get(0));
+        System.out.println("High: " + numbers.get(numbers.size()-1));
+        int[] modeCalculation = new int[5];
+        for (int num : numbers) {
+            modeCalculation[num-1]++;
+        }
+        for (int i : modeCalculation) {
+            System.out.print(i + " ");
+        }
+    }
+
+    /*
+     * returns a 2d array of the current course schedule
+     */
     public Course[][] getSchedule() {
         return schedule;
     }
 }
-
-
-
-
-/*
- * if (s.getChoices()[i] == schedule[row][col].getId() && s.notAttending(schedule[row]) && s.notAttending(schedule[row][col].getId()) && !schedule[row][col].atMax()) {
-                            if (schedule[row][col].getId() == s.getChoices()[i]) {
-                                schedule[row][col].addStudent(s);
-                                s.setAttending(row, col, schedule[row][col]);
-                            }
-                        }
- */

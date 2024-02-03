@@ -52,6 +52,10 @@ public class Student {
         attending[row][col] = c;
     }
 
+    public void clearAttending() {
+        attending = new Course[5][5];
+    }
+
     public void addCurrInterest() {
         currInterest++;
     }
