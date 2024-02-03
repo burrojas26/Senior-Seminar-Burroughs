@@ -27,3 +27,6 @@ Today i finished the outline for my algorithm. I was able to add the students to
 
 Update to 2/1/24:
 I implemented an algorithm to place students that have multiple interests per time slot in the course with less interest from the other people. 
+
+2/3/24:
+Today I made the percent calculations in my scheduler class actually dynamic, so it finds the best value based on the average number of students choices they get assigned to. I also started cleaning up files and adding comments. 
