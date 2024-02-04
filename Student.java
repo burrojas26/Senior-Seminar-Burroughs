@@ -152,16 +152,16 @@ public class Student {
      * toString method returns a combination of the student's name and the courses they are attending
      */
     public String toString() {
-        String finalStr = "";
-        finalStr+="Name: " + name + "; Attending: ";
+        String finalStr = "\n";
+        finalStr+="Name: " + name + "\nAttending: ";
         for (int row = 0; row < attending.length; row++) {
             for (int col = 0; col < attending[0].length; col++) {
                 if (attending[row][col] != null) {
-                    finalStr+=attending[row][col] + ", ";
+                    finalStr+="\nTime " + (row+1) + ": \n- " + attending[row][col];
                 }
             }
-            System.out.println("");
         }
+        finalStr+="\n";
         return finalStr;
     }
 }

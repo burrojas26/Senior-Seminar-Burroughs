@@ -196,7 +196,7 @@ public class Course {
      * to string method returns the course's name
      */
     public String toString() {
-        return Integer.toString(id);
+        return name;
     }
     
 }

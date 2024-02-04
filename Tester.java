@@ -26,10 +26,14 @@ public class Tester {
         scheduler.createSchedule();
         Course[][] schedule = scheduler.getSchedule();
         String option = "";
+
+        // Prints the master schedule
+        scheduler.printMaster();
+
         // While loop handles the user input
         while (!option.equals("quit")) {
             option = "";
-            System.out.print("Type search to search for a student, course to get the roster for a course, average to get the average number of choices that each student got, or quit to quit: ");
+            System.out.print("Type search to search for a student, course to get the roster for a course, average to get the average number of choices that each student got, room to print by room, or quit to quit: ");
             option = scan.nextLine();
             if (option.equals("search")) {
                 System.out.print("Enter the name of the student: ");
@@ -43,6 +47,9 @@ public class Tester {
             }
             if (option.equals("average")) {
                 scheduler.printAverageData();
+            }
+            if (option.equals("room")) {
+                scheduler.printRoom();
             }
         }
     }

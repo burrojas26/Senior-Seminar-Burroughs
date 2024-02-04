@@ -295,6 +295,32 @@ public class Schedule {
             }
         }
     }
+
+    /*
+     * Prints the master schedule of classes
+     */
+    public void printMaster() {
+        for (int row = 0; row < schedule.length; row++) {
+            System.out.println("Time " + (row+1) + ": ");
+            for (int col = 0; col < schedule[0].length; col++) {
+                System.out.println("- " + schedule[row][col]);
+            }
+        }
+        System.out.println("");
+    }
+
+    /*
+     * prints the schedule by room
+     */
+    public void printRoom() {
+        for (int col = 0; col < schedule.length; col++) {
+            System.out.println("Room " + (col+1) + ": ");
+            for (int row = 0; row < schedule[0].length; row++) {
+                System.out.println(schedule[row][col]);
+            }
+        }
+    }
+
     /*
      * returns a 2d array of the current course schedule
      */
