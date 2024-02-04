@@ -30,3 +30,6 @@ I implemented an algorithm to place students that have multiple interests per ti
 
 2/3/24:
 Today I made the percent calculations in my scheduler class actually dynamic, so it finds the best value based on the average number of students choices they get assigned to. I also started cleaning up files and adding comments. 
+
+Update to 2/3/24:
+I added functions to search for a student's roster, and to search for a course's roster.
