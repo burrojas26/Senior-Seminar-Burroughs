@@ -1,11 +1,19 @@
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.Collections;
 
+/**
+ * @author Jasper Burroughs
+ * @since 1/11/24
+ * This class uses methods from the other classes to create a schedule and populate it with students
+ * it also controlls the user input
+ */
 public class Tester {
     
+    /*
+     * The method that runs the program
+     * uses the other classees to create a schedule and populate it with students
+     * runs a while loop so the user can search for a student, a course, or print the averages
+     */
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         // Data class manages the data
@@ -18,6 +26,7 @@ public class Tester {
         scheduler.createSchedule();
         Course[][] schedule = scheduler.getSchedule();
         String option = "";
+        // While loop handles the user input
         while (!option.equals("quit")) {
             option = "";
             System.out.print("Type search to search for a student, course to get the roster for a course, average to get the average number of choices that each student got, or quit to quit: ");
@@ -36,34 +45,5 @@ public class Tester {
                 scheduler.printAverageData();
             }
         }
-
-        // Printing stuff
-        for (int i = 0; i < schedule.length; i++) {
-            for (int j = 0; j < schedule[0].length; j++) {
-                System.out.print(schedule[i][j] + " ");
-            }
-            System.out.println("");
-        }
-        System.out.println("");
-
-        scheduler.printAverageData();
-        
-        // for (int i = 0; i < students.size(); i++) {
-        //     int[] currChoices = students.get(i).getChoices();
-        //     Course[][] attending = students.get(i).getAttending();
-        //     System.out.println("Choices: ");
-        //     for (int choice : currChoices) {
-        //         System.out.println(choice);
-        //     }
-        //     System.out.println("\nAttending: ");
-        //     for (int row = 0; row < attending.length; row++) {
-        //         for (int col = 0; col < attending[0].length; col++) {
-        //             if (attending[row][col] != null) {
-        //                 System.out.print(attending[row][col] + " ");
-        //             }
-        //         }
-        //         System.out.println("");
-        //     }
-        // }
     }
 }

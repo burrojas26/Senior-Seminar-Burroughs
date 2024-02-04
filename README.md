@@ -33,3 +33,6 @@ Today I made the percent calculations in my scheduler class actually dynamic, so
 
 Update to 2/3/24:
 I added functions to search for a student's roster, and to search for a course's roster.
+
+2/4/24:
+Today I finished adding comments and cleaning up code. Project is complete. 

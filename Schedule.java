@@ -1,13 +1,26 @@
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * @author Jasper Burroughs
+ * @since 1/22/24
+ * This class uses the passed in students and courses to create and optimized schedule and populate it with students
+ * It finds courses that conlfict and then arranges them in a 2d array
+ * Then it populates the courses with students
+ * if two classes a student wants are in the same row it gives them the less popular one
+ * it runs this algorithm many times with different percents (see the comments above the percent variable) in order to get the best average
+ * This class also contains methods to search for a course, search for a student, and to priont the average data
+ */
 public class Schedule {
     Course[][] schedule = new Course[5][5];
     ArrayList<Student> students;
     ArrayList<Course> courses;
     ArrayList<Course> coursesTwice = new ArrayList<Course>();
+    // These variables are used to make the percent variable dynamic
     double bestAverage = 0;
     double bestPercent = 0.00;
+    // Percent varibale is used to determine if two courses conflict with each other
+    // If percent of the students interested in one course are also interested in another course those courses are considered to be conflicting
     double percent = 0.00;
 
     /*

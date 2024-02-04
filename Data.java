@@ -3,14 +3,23 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Collections;
+
+/**
+ * @author Jasper Burroughs
+ * @since 1/16/24
+ * This class loads data from the spreadsheets
+ * it has functions to return the data loaded from the spreadsheets
+ * it also has a method to find the number of students interested in each course
+ */
 public class Data {
     ArrayList<Course> courses = new ArrayList<Course>();
     ArrayList<Student> students = new ArrayList<Student>();
 
     /*
-     * gets the courses from the spreadsheet
+     * gets the courses from the spreadsheet using file io
      */
     public void loadCourses() {
+        // File io from W3 Schools
         try {
             File myObj = new File("seminarKey.csv");
             Scanner myScanner = new Scanner(myObj);
@@ -32,6 +41,7 @@ public class Data {
      * adds a duplicate course if the course is occurring twice
      */
     public void getInterest() {
+        // Adds the number of interested students to each course's interest variable
         for (Course c : courses) {
             for (Student s : students) {
                 if (s.checkChoice(c.getId())) {
@@ -41,7 +51,7 @@ public class Data {
 
         }
         
-        // Sort
+        // Sorting
         for (int i = 0; i < courses.size(); i++) {
             for (int j = i+1; j < courses.size(); j++) {
                 if (courses.get(j).getInterest() > courses.get(i).getInterest()) {
@@ -75,6 +85,7 @@ public class Data {
      */
     public void loadStudents() {
         ArrayList<String> rawData = new ArrayList<String>();
+        // File io from W3 Schools
         try {
             //Gets the students from the data table and adds them to the ArrayList
             File myObj = new File("SrSeminar_RawData.csv");
