@@ -59,15 +59,12 @@ public class Schedule {
             findConflicts();
             populateSchedule();
             assignStudents();
-            System.out.println(getAverage());
             if (getAverage() > bestAverage) {
                 bestAverage = getAverage();
                 bestPercent = percent;
             }
         }
         percent = bestPercent;
-        System.out.println("Best: " + bestPercent);
-        System.out.println("Percent: " + percent);
         for (Course c : courses) {
             c.clearConflicts();
         }
@@ -253,11 +250,38 @@ public class Schedule {
         for (int num : numbers) {
             modeCalculation[num-1]++;
         }
+        System.out.println("Mode: ");
         for (int i : modeCalculation) {
             System.out.print(i + " ");
         }
+        System.out.println("");
     }
 
+    /*
+     * searches all of the students to find the passed in student name
+     * prints the students name and courses
+     */
+    public void search(String name) {
+        for (Student s : students) {
+            if (s.getName().equals(name)) {
+                System.out.println(s);
+            }
+        }
+    }
+
+    /*
+     * searches all of the courses for the passed in name
+     * prints all of the students attending that course
+     */
+    public void searchCourse(String name) {
+        for (Course c : courses) {
+            if (c.getName().equals(name)) {
+                for (Student s : c.getAttending()) {
+                    System.out.println(s.getName());
+                }
+            }
+        }
+    }
     /*
      * returns a 2d array of the current course schedule
      */

@@ -98,7 +98,17 @@ public class Student {
     }
 
     public String toString() {
-        return time + ": " + name;
+        String finalStr = "";
+        finalStr+="Name: " + name + "; Attending: ";
+        for (int row = 0; row < attending.length; row++) {
+            for (int col = 0; col < attending[0].length; col++) {
+                if (attending[row][col] != null) {
+                    finalStr+=attending[row][col] + ", ";
+                }
+            }
+            System.out.println("");
+        }
+        return finalStr;
     }
 }
 

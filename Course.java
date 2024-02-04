@@ -74,6 +74,13 @@ public class Course {
     }
 
     /*
+     * returns the array list of students attending
+     */
+    public ArrayList<Student> getAttending() {
+        return attending;
+    }
+
+    /*
      * returns the interested students as an array list
      */
     public ArrayList<Student> getInterestedStudents() {
@@ -189,7 +196,7 @@ public class Course {
      * to string method returns the course's name
      */
     public String toString() {
-        return name;
+        return Integer.toString(id);
     }
     
 }
