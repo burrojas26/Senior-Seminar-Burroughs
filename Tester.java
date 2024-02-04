@@ -19,6 +19,7 @@ public class Tester {
         Course[][] schedule = scheduler.getSchedule();
         String option = "";
         while (!option.equals("quit")) {
+            option = "";
             System.out.print("Type search to search for a student, course to get the roster for a course, average to get the average number of choices that each student got, or quit to quit: ");
             option = scan.nextLine();
             if (option.equals("search")) {
