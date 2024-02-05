@@ -138,7 +138,10 @@ public class Schedule {
         // assigns students that have multiple choices in the row to the one with the least number of interested students
         int[] currInterest = new int[5];
         int smallestIndex = 0;
+
         for (int row = 0; row < schedule.length; row++) {
+            // Finds the interest for each course in the current row
+            // Finds the number of courses that each student is interested in that arer in the current row
             for (Student s : students) {
                 s.clearCurrInterest();
                 for (int col = 0; col < schedule[0].length; col++) {
@@ -150,6 +153,7 @@ public class Schedule {
                     }
                 }
             }
+            // Assigns students that have more than one interest for the current row to the choice that has less interested students
             for (Student s : students) {
                 if (students.get(0).getCurrInterest() > 1) {
                     for (int col = 1; col < currInterest.length; col++) {
