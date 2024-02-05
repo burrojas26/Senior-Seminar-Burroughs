@@ -267,7 +267,7 @@ public class Schedule {
         for (int num : numbers) {
             modeCalculation[num-1]++;
         }
-        System.out.println("Mode: ");
+        System.out.println("Values of each number of choices: ");
         for (int i : modeCalculation) {
             System.out.print(i + " ");
         }
