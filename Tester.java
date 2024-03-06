@@ -33,12 +33,17 @@ public class Tester {
         // While loop handles the user input
         while (!option.equals("quit")) {
             option = "";
-            System.out.print("Type search to search for a student, course to get the roster for a course, average to get the average number of choices that each student got, room to print by room, or quit to quit: ");
+            System.out.print("Type search to search for a student, search-all to get all the students, course to get the roster for a course, average to get the average number of choices that each student got, room to print by room, or quit to quit: ");
             option = scan.nextLine();
             if (option.equals("search")) {
                 System.out.print("Enter the name of the student: ");
                 String studentName = scan.nextLine();
                 scheduler.search(studentName);
+            }
+            if (option.equals("search-all")) {
+                for (Student s : students) {
+                    scheduler.search(s.getName());
+                }
             }
             if (option.equals("course")) {
                 System.out.print("Enter the name of the course: ");
